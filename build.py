@@ -8,7 +8,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 GH = "https://github.com/jmanuelhe"
-NAME = "Juan Herrera"
+NAME = "Juan Manuel Herrera Mejia"
+EMAIL = "jherreramej@gmail.com"
+LINKEDIN = "https://www.linkedin.com/in/juanmhmejia"
 
 PROJECTS = {
     "mdd": {
@@ -189,7 +191,8 @@ def nav(active=None):
     return f"""<header class="top"><a class="me" href="index.html">{NAME}</a><nav aria-label="Portafolios">{links}</nav></header>"""
 
 
-FOOT = f"""<footer class="foot"><p>{NAME} · Colombia · <a href="{GH}">GitHub</a></p>
+FOOT = f"""<footer class="foot"><p>{NAME} · Medellín, Colombia</p>
+<p class="contact"><a href="mailto:{EMAIL}">{EMAIL}</a> <a href="{LINKEDIN}">LinkedIn</a> <a href="{GH}">GitHub</a></p>
 <p class="small">Todos los proyectos tienen código, datos y tests en sus repositorios.</p></footer>
 </body></html>"""
 
@@ -258,7 +261,7 @@ def index():
 <main id="contenido">
 <section class="hero">
 <h1>Durante 90 días seguí un canal sobre IA y anoté cada publicación. De esas notas salieron seis proyectos.</h1>
-<p class="lede">Soy {NAME.split()[0]}. Trabajo con datos e IA en Colombia. Este portafolio está organizado por rol: elige el que te interesa, o recorre la línea de tiempo.</p>
+<p class="lede">Soy Juan Manuel, estudiante de la Universidad de Antioquia en Medellín. Trabajo con datos e IA. Este portafolio está organizado por rol: elige el que te interesa, o recorre la línea de tiempo.</p>
 <figure class="ribbon" aria-labelledby="ribbon-cap">
 <div id="ribbon" role="img" aria-label="Línea de tiempo de 82 publicaciones entre agosto y octubre de 2026, con las publicaciones que inspiraron proyectos marcadas."></div>
 <figcaption id="ribbon-cap">Cada barra es un día, del 2 de agosto al 30 de octubre de 2026; la altura es el número de publicaciones.

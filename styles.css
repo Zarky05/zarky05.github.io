@@ -94,7 +94,9 @@ main{max-width:1180px;margin:0 auto;padding:0 20px}
 .also a{font-weight:600}
 
 .foot{max-width:1180px;margin:0 auto;padding:28px 20px 48px;border-top:1px solid var(--rule);color:var(--muted)}
-.foot p{margin:4px 0}.small{font-size:.88rem}
+.foot p{margin:4px 0}
+.contact{display:flex;flex-wrap:wrap;gap:6px 20px}
+.contact a{color:var(--ink);font-weight:600}.small{font-size:.88rem}
 
 @media (max-width:860px){
   .roles{grid-template-columns:1fr}
