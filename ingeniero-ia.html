@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ingeniero de IA · Juan Herrera</title>
+<meta name="description" content="Construyo aplicaciones con LLMs que se pueden medir, auditar y operar con presupuesto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top"><a class="me" href="index.html">Juan Herrera</a><nav aria-label="Portafolios"><a href="analista.html" style="--role:var(--analista)">Analista de datos</a><a href="cientifico.html" style="--role:var(--cientifico)">Científico de datos</a><a href="ingeniero-ia.html" style="--role:var(--ia)" aria-current=page>Ingeniero de IA</a></nav></header>
+<main id="contenido" style="--role:var(--ia)">
+<section class="role-hero"><h1>Ingeniero de IA</h1><p class="pitch">Construyo aplicaciones con LLMs que se pueden medir, auditar y operar con presupuesto.</p><p>Un sistema RAG evaluado con preguntas propias y un agente con herramientas seguras. En los dos, la prioridad es la confiabilidad: citas verificables, límites, costos y tests sin red.</p></section>
+<article class="entry" id="rag-document-qa" style="--role:var(--ia)">
+<div class="entry-text">
+<h2>RAG Document Q&amp;A</h2>
+<p class="question">¿Puedo preguntarle a mis propios informes y recibir respuestas con fuente?</p>
+<p class="seed">Idea tomada de “Building a Document Q&amp;A System”, publicada el 26 de agosto.</p>
+<p class="number"><strong>0,933</strong> <span>de acierto en la primera posición, sobre 45 preguntas escritas a mano</span></p>
+<h3>Qué hice</h3><ul><li>Diseñé un chunking estructural: una publicación por fragmento, 105 fragmentos en total.</li><li>Implementé BM25 desde cero, TF-IDF de caracteres y fusión híbrida (RRF).</li><li>Agregué filtros por fecha y por mes, que corrigieron todas las preguntas de tipo fecha.</li><li>Generación con Claude con citas verificables y detección de fuentes inventadas.</li></ul>
+<h3>Qué encontré</h3><p>El híbrido supera a cada método por separado. El punto débil medido es la búsqueda semántica, y por eso el siguiente paso son los embeddings.</p>
+<p class="stack"><span>Herramientas:</span> Python, scikit-learn, Claude API, Streamlit, python-docx, pytest</p>
+<p class="links"><a href="https://github.com/jmanuelhe/rag-document-qa">Ver código en GitHub</a></p>
+</div>
+<figure class="eval"><table><caption>Recuperación, 45 preguntas</caption><thead><tr><th>Método</th><th>Hit@1</th><th>MRR</th></tr></thead><tbody><tr><td>BM25</td><td>0,844</td><td>0,875</td></tr><tr><td>TF-IDF</td><td>0,889</td><td>0,904</td></tr><tr><td>Híbrido</td><td>0,911</td><td>0,922</td></tr><tr class="best"><td>Híbrido + filtros</td><td>0,933</td><td>0,944</td></tr></tbody></table></figure>
+</article><article class="entry" id="ai-csv-analyst-agent" style="--role:var(--ia)">
+<div class="entry-text">
+<h2>AI CSV Analyst Agent</h2>
+<p class="question">¿Puede un agente analizar un CSV sin ejecutar código peligroso ni gastar sin control?</p>
+<p class="seed">Idea tomada de “Build an AI Data Analyst That Turns CSV Files into Insights”, publicada el 28 de octubre.</p>
+<p class="number"><strong>6</strong> <span>herramientas validadas: el modelo nunca ejecuta código arbitrario</span></p>
+<h3>Qué hice</h3><ul><li>Construí un bucle de tool use con Claude, con límites de pasos y de presupuesto en USD.</li><li>Hice que los errores de las herramientas vuelvan al modelo como datos, para que se corrija solo.</li><li>Implementé un tracker de costo y latencia (tokens, p50/p95, log JSONL por llamada).</li><li>Creé un cliente offline que imita la API, para correr el agente y sus tests sin costo.</li></ul>
+<h3>Qué encontré</h3><p>En la demo, el agente encontró solo que el contrato es la variable que más separa el churn (42,7 % vs. 2,8 %), igual que el análisis SQL hecho a mano.</p>
+<p class="stack"><span>Herramientas:</span> Python, Claude API (tool use), pandas, matplotlib, pytest</p>
+<p class="links"><a href="https://github.com/jmanuelhe/ai-csv-analyst-agent">Ver código en GitHub</a></p>
+</div>
+<figure><a href="assets/img/agente_chart.png" title="Ver imagen en tamaño completo"><img src="assets/img/agente_chart.png" alt="Gráfico generado por el agente: tasa de churn por tipo de contrato." loading="lazy"></a></figure>
+</article>
+<section class="aside-grid">
+<div><h2>Habilidades que demuestran estos proyectos</h2><ul class="skills"><li>Claude API: tool use y prompts de sistema</li><li>RAG: chunking, BM25, búsqueda híbrida</li><li>Evaluación de LLMs (hit@k, MRR, abstención)</li><li>Seguridad en agentes</li><li>Seguimiento de costo y latencia</li><li>Tests con clientes simulados</li></ul></div>
+<div><h2>También relevante</h2><ul class="also"><li><a href="https://github.com/jmanuelhe/model-drift-monitoring">Model Drift Monitoring</a> · ¿Cómo sé que mi modelo dejó de servir y cuándo debo reentrenarlo?</li><li><a href="https://github.com/jmanuelhe/my-data-diary-analytics">My Data Diary Analytics</a> · ¿Cómo cambió en tres meses el contenido de un canal educativo de IA?</li></ul></div>
+</section>
+</main>
+<footer class="foot"><p>Juan Herrera · Colombia · <a href="https://github.com/jmanuelhe">GitHub</a></p>
+<p class="small">Todos los proyectos tienen código, datos y tests en sus repositorios.</p></footer>
+</body></html>

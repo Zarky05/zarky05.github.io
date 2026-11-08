@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analista de datos · Juan Herrera</title>
+<meta name="description" content="Convierto datos desordenados en respuestas que alguien puede usar para decidir.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top"><a class="me" href="index.html">Juan Herrera</a><nav aria-label="Portafolios"><a href="analista.html" style="--role:var(--analista)" aria-current=page>Analista de datos</a><a href="cientifico.html" style="--role:var(--cientifico)">Científico de datos</a><a href="ingeniero-ia.html" style="--role:var(--ia)">Ingeniero de IA</a></nav></header>
+<main id="contenido" style="--role:var(--analista)">
+<section class="role-hero"><h1>Analista de datos</h1><p class="pitch">Convierto datos desordenados en respuestas que alguien puede usar para decidir.</p><p>Estos proyectos muestran el trabajo de punta a punta: sacar datos de donde están (incluso de un Word), limpiarlos con criterio, consultarlos con SQL y contar lo que encontré con gráficos y recomendaciones.</p></section>
+<article class="entry" id="my-data-diary-analytics" style="--role:var(--analista)">
+<div class="entry-text">
+<h2>My Data Diary Analytics</h2>
+<p class="question">¿Cómo cambió en tres meses el contenido de un canal educativo de IA?</p>
+
+<p class="number"><strong>9 % → 48 %</strong> <span>de publicaciones sobre carrera profesional, de agosto a octubre</span></p>
+<h3>Qué hice</h3><ul><li>Extraje las tablas de mis tres informes mensuales en Word a un dataset de 82 publicaciones.</li><li>Limpié fechas, detecté reenvíos y distinguí series recurrentes de duplicados reales.</li><li>Clasifiqué cada publicación por formato y tema con reglas auditables, validadas con tests.</li><li>Construí gráficos y un dashboard interactivo con filtro de texto.</li></ul>
+<h3>Qué encontré</h3><p>El canal pasó de enseñar a construir (41 % de proyectos guiados en agosto) a preparar para el empleo. Agosto sirve para aprender a construir; septiembre y octubre, para buscar trabajo.</p>
+<p class="stack"><span>Herramientas:</span> Python, pandas, python-docx, expresiones regulares, matplotlib, Plotly, pytest</p>
+<p class="links"><a href="https://github.com/jmanuelhe/my-data-diary-analytics">Ver código en GitHub</a><a href="dashboards/my-data-diary.html">Abrir dashboard</a></p>
+</div>
+<figure><a href="assets/img/temas_por_mes.png" title="Ver imagen en tamaño completo"><img src="assets/img/temas_por_mes.png" alt="Mapa de calor de temas por mes: carrera profesional sube de 9 % a 48 %, LLMs baja de 31 % a 8 %." loading="lazy"></a></figure>
+</article><article class="entry" id="telco-churn-sql-analysis" style="--role:var(--analista)">
+<div class="entry-text">
+<h2>Telco Churn · Análisis SQL</h2>
+<p class="question">¿Quién se va, cuánto ingreso se pierde y dónde conviene actuar primero?</p>
+
+<p class="number"><strong>38 %</strong> <span>del ingreso perdido viene de un segmento que es solo el 13 % de los clientes</span></p>
+<h3>Qué hice</h3><ul><li>Modelé los datos en capas: CSV crudo, vista de staging tipada y consultas de negocio.</li><li>Escribí 9 consultas SQL con CTE, funciones de ventana y FILTER, y reglas de calidad de datos.</li><li>Controlé una variable de confusión: el aparente efecto de los servicios adicionales era sobre todo antigüedad.</li><li>Convertí los hallazgos en cinco recomendaciones accionables.</li></ul>
+<h3>Qué encontré</h3><p>Contrato mes a mes + fibra + menos de un año: 70 % de churn. Es el segmento donde la retención rinde más.</p>
+<p class="stack"><span>Herramientas:</span> SQL, DuckDB, Python, pandas, matplotlib, pytest</p>
+<p class="links"><a href="https://github.com/jmanuelhe/telco-churn-sql-analysis">Ver código en GitHub</a></p>
+</div>
+<figure><a href="assets/img/matriz_riesgo.png" title="Ver imagen en tamaño completo"><img src="assets/img/matriz_riesgo.png" alt="Matriz de churn por contrato y tipo de internet: mes a mes con fibra llega a 55 %." loading="lazy"></a></figure>
+</article>
+<section class="aside-grid">
+<div><h2>Habilidades que demuestran estos proyectos</h2><ul class="skills"><li>SQL (CTE, funciones de ventana, calidad de datos)</li><li>Python y pandas</li><li>Visualización con matplotlib y Plotly</li><li>Dashboards</li><li>Limpieza y validación de datos</li><li>Comunicación de hallazgos y recomendaciones</li></ul></div>
+<div><h2>También relevante</h2><ul class="also"><li><a href="https://github.com/jmanuelhe/ai-csv-analyst-agent">AI CSV Analyst Agent</a> · ¿Puede un agente analizar un CSV sin ejecutar código peligroso ni gastar sin control?</li><li><a href="https://github.com/jmanuelhe/churn-prediction-pipeline">Churn Prediction Pipeline</a> · ¿A qué clientes conviene ofrecerles retención, si cada oferta cuesta dinero?</li></ul></div>
+</section>
+</main>
+<footer class="foot"><p>Juan Herrera · Colombia · <a href="https://github.com/jmanuelhe">GitHub</a></p>
+<p class="small">Todos los proyectos tienen código, datos y tests en sus repositorios.</p></footer>
+</body></html>
