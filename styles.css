@@ -213,6 +213,15 @@ main{max-width:1200px;margin:0 auto;padding:0 24px}
 .contact-list span{font:.85rem var(--mono);color:var(--faint);padding-top:2px}
 .contact-list a{color:var(--amber);font-weight:600}
 
+.sw-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.sw{border-left:2px solid var(--role);padding:2px 0 2px 16px}
+.sw h3{font-size:1.05rem;color:var(--role);margin-bottom:10px}
+.sw ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.sw li{font-size:.9rem;padding:5px 10px;background:var(--panel);border:1px solid var(--line);border-radius:7px;align-self:flex-start}
+.langs{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:12px}
+.langs li{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;min-width:160px;color:var(--muted);font-size:.92rem}
+.langs span{display:block;color:var(--text);font-family:var(--display);font-weight:700;font-size:1.1rem}
+
 /* notas */
 .notes{list-style:none;padding:0;margin:0 0 88px;border-top:1px solid var(--line)}
 .notes li{padding:30px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:200px 1fr;gap:4px 32px}
@@ -235,6 +244,7 @@ main{max-width:1200px;margin:0 auto;padding:0 24px}
 
 @media (max-width:900px){
   .skill-grid{grid-template-columns:1fr 1fr}
+  .sw-grid{grid-template-columns:1fr 1fr;row-gap:28px}
   .notes li{grid-template-columns:1fr}
   .notes .when{grid-row:auto}
 }

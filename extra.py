@@ -31,6 +31,18 @@ SKILLS = [
                              "Costo y latencia", "Formación de equipos"]),
 ]
 
+SOFTWARE = [
+    ("Estadística", "cientifico", ["R y RStudio"]),
+    ("Datos y BI", "analista", ["Excel avanzado", "Power BI", "Tableau", "Google Sheets y Looker Studio"]),
+    ("Desarrollo", "amber", ["VS Code", "Cursor", "PyCharm", "Jupyter y Google Colab", "Anaconda", "Git y GitHub", "PostgreSQL y MySQL"]),
+    ("IA", "ia", ["Claude y Claude Code", "ChatGPT y Copilot", "Gemini y NotebookLM", "Perplexity", "OpenAI API y Gemini API",
+                  "LangChain y LlamaIndex", "Ollama y LM Studio", "Midjourney"]),
+    ("Productividad", "muted", ["Word y PowerPoint", "Notion y Google Workspace", "n8n, Zapier y Make", "Microsoft Teams y Slack"]),
+]
+
+LANGS = [("Español", "Nativo"), ("Inglés", "Intermedio (B1–B2)"), ("Portugués", "Intermedio"),
+         ("Alemán", "Básico"), ("Italiano", "Básico")]
+
 # Para agregar un certificado: ("Nombre", "Entidad", "Año", "enlace de verificación o None")
 CERTS = []
 
@@ -131,11 +143,13 @@ def build(g):
 <section class="role-hero">{BACK}<p class="tabname">sobre_mi.md</p><h1>Sobre mí</h1>
 <p class="pitch">Estudio Estadística, enseño IA a equipos de empresa y construyo proyectos de datos que se pueden revisar.</p>
 <p>Soy Juan Manuel Herrera Mejia y vivo en Medellín. Me interesa el punto donde la estadística se encuentra con decisiones reales: cuánto vale un modelo en dinero,
-cuándo deja de servir y cómo explicárselo a alguien que no programa. Hablo español como lengua materna y tengo inglés intermedio (B1–B2).</p>
+cuándo deja de servir y cómo explicárselo a alguien que no programa. Hablo español, inglés y portugués, y estoy aprendiendo alemán e italiano.</p>
 <p class="actions"><a class="btn" href="{CV}" download>Descargar hoja de vida (PDF)</a><a class="btn ghost" href="mailto:{EMAIL}">Escribirme</a></p>
 </section>
 <section class="block"><h2>Trayectoria</h2><ol class="timeline">{tl}</ol></section>
 <section class="block"><h2>Habilidades</h2><div class="skill-grid">{sk}</div></section>
+<section class="block"><h2>Software que uso</h2><div class="sw-grid">{"".join(f'<div class="sw" style="--role:{COLOR[c]}"><h3>{e(n)}</h3><ul>{"".join(f"<li>{e(i)}</li>" for i in items)}</ul></div>' for n, c, items in SOFTWARE)}</div></section>
+<section class="block"><h2>Idiomas</h2><ul class="langs">{"".join(f'<li><span>{e(l)}</span>{e(v)}</li>' for l, v in LANGS)}</ul></section>
 <section class="block" id="certificados"><h2>Certificados de formación</h2>{certs}</section>
 <section class="block contact-block"><h2>Hablemos</h2>
 <p>Estoy abierto a prácticas, empleos y proyectos de análisis de datos, ciencia de datos e IA, en Medellín, híbridos o remotos.</p>
@@ -235,7 +249,8 @@ Construyo proyectos que se evalúan en términos de negocio, con código, datos 
 </div><aside>
 <h2>Educación</h2><p class="when">2024 – 2029 (esperado)</p><h3>Pregrado en Estadística</h3><p>Universidad de Antioquia, Medellín.</p>
 <h2>Habilidades</h2>{skills}
-<h2>Idiomas</h2><p>Español, nativo.</p><p>Inglés, intermedio (B1–B2).</p>
+<h2>Software</h2>{"".join(f"<p><b>{e(n)}:</b> {e(chr(44).join(chr(32)+x for x in items).strip())}.</p>" for n, c, items in SOFTWARE)}
+<h2>Idiomas</h2>{"".join(f"<p>{e(l)}, {e(v[0].lower() + v[1:])}.</p>" for l, v in LANGS)}
 <h2>Portafolio</h2><p>Seis proyectos organizados por rol (analista, científico de datos, ingeniero de IA) en jmanuelhe.github.io.</p>
 </aside></main></body></html>"""
     src = ROOT / "assets" / "cv.html"
