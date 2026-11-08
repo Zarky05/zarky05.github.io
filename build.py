@@ -135,7 +135,7 @@ PROJECTS = {
 
 ROLES = {
     "analista": {
-        "file": "analista.html", "name": "Analista de datos", "short": "análisis de datos", "color": "var(--analista)",
+        "file": "analista.html", "tab": "analista.sql", "name": "Analista de datos", "short": "análisis de datos", "color": "var(--analista)",
         "pitch": "Convierto datos desordenados en respuestas que alguien puede usar para decidir.",
         "intro": "Estos proyectos muestran el trabajo de punta a punta: sacar datos de donde están (incluso de un Word), "
                  "limpiarlos con criterio, consultarlos con SQL y contar lo que encontré con gráficos y recomendaciones.",
@@ -144,7 +144,7 @@ ROLES = {
                    "Dashboards", "Limpieza y validación de datos", "Comunicación de hallazgos y recomendaciones"],
     },
     "cientifico": {
-        "file": "cientifico.html", "name": "Científico de datos", "short": "ciencia de datos", "color": "var(--cientifico)",
+        "file": "cientifico.html", "tab": "cientifico.py", "name": "Científico de datos", "short": "ciencia de datos", "color": "var(--cientifico)",
         "pitch": "Construyo modelos que se evalúan en dinero, no solo en accuracy, y los vigilo cuando están en producción.",
         "intro": "Dos proyectos conectados: un modelo de churn con umbral elegido por beneficio de negocio, "
                  "y el sistema que detecta cuándo ese modelo deja de funcionar.",
@@ -153,7 +153,7 @@ ROLES = {
                    "Estadística (PSI, KS, chi-cuadrado)", "Variables de confusión", "Monitoreo de modelos"],
     },
     "ingeniero-ia": {
-        "file": "ingeniero-ia.html", "name": "Ingeniero de IA", "short": "ingeniería de IA", "color": "var(--ia)",
+        "file": "ingeniero-ia.html", "tab": "agente_ia.py", "name": "Ingeniero de IA", "short": "ingeniería de IA", "color": "var(--ia)",
         "pitch": "Construyo aplicaciones con LLMs que se pueden medir, auditar y operar con presupuesto.",
         "intro": "Un sistema RAG evaluado con preguntas propias y un agente con herramientas seguras. "
                  "En los dos, la prioridad es la confiabilidad: citas verificables, límites, costos y tests sin red.",
@@ -182,12 +182,36 @@ def head(title, desc):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&family=STIX+Two+Text:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="skip" href="#contenido">Saltar al contenido</a>
 """
+
+
+BACKDROP = """<div class="backdrop" aria-hidden="true">
+<span class="c db" style="left:58%;top:3%">SELECT * FROM clientes</span>
+<span class="m" style="left:80%;top:2%">β = (XᵀX)⁻¹ Xᵀy</span>
+<span class="m" style="left:93%;top:22%">σ²</span>
+<span class="c py" style="left:66%;top:16%">&gt;&gt;&gt; import pandas as pd</span>
+<span class="m" style="left:60%;top:40%">P(A|B) = P(B|A) P(A) / P(B)</span>
+<span class="c py" style="left:84%;top:46%">def fit(X, y):</span>
+<span class="m" style="left:92%;top:62%">∫ f(x) dx</span>
+<span class="c db" style="left:68%;top:70%">GROUP BY mes</span>
+<span class="m" style="left:62%;top:86%">μ ± 1,96 σ/√n</span>
+<span class="m" style="left:80%;top:88%">Σ (xᵢ − x̄)² / (n − 1)</span>
+<svg class="bell" viewBox="0 0 200 80" style="left:50%;top:30%"><path d="M0 78 C60 78 70 4 100 4 S140 78 200 78"/></svg>
+</div>"""
+
+
+BACKDROP_ROLE = """<div class="backdrop" aria-hidden="true">
+<span class="c db" style="left:66%;top:8%">SELECT * FROM clientes</span>
+<span class="m" style="left:84%;top:22%">β = (XᵀX)⁻¹ Xᵀy</span>
+<span class="c py" style="left:70%;top:62%">&gt;&gt;&gt; import pandas as pd</span>
+<span class="m" style="left:88%;top:76%">σ²</span>
+<svg class="bell" viewBox="0 0 200 80" style="left:68%;top:28%"><path d="M0 78 C60 78 70 4 100 4 S140 78 200 78"/></svg>
+</div>"""
 
 
 def nav(active=None):
@@ -197,7 +221,7 @@ def nav(active=None):
     return f"""<header class="top"><a class="me" href="index.html">{NAME}</a><nav aria-label="Portafolios">{links}</nav></header>"""
 
 
-FOOT = f"""<footer class="foot"><p>{NAME} · Medellín, Colombia</p>
+FOOT = f"""<footer class="foot"><p class="who">{NAME}, Medellín (Colombia)</p>
 <p class="contact"><a href="mailto:{EMAIL}">{EMAIL}</a> <a href="{LINKEDIN}">LinkedIn</a> <a href="{GH}">GitHub</a></p>
 <p class="small">Todos los proyectos tienen código, datos y tests en sus repositorios.</p></footer>
 </body></html>"""
@@ -209,8 +233,8 @@ def entry(key, role_color):
     if p["seed"]:
         d, t = p["seed"]
         seed = f'<p class="seed">Idea tomada de “{e(t)}”, publicada el {int(d[8:])} de {["", "", "", "", "", "", "", "", "agosto", "septiembre", "octubre"][int(d[5:7])]}.</p>'
-    fig = (f'<figure><a href="assets/img/{p["img"]}" title="Ver imagen en tamaño completo"><img src="assets/img/{p["img"]}" alt="{e(p["img_alt"])}" loading="lazy"></a></figure>'
-           if p["img"] else '<figure class="eval"><table><caption>Recuperación, 45 preguntas</caption>'
+    fig = (f'<figure class="out"><figcaption><span>Out</span> {p["img"]}</figcaption><a href="assets/img/{p["img"]}" title="Ver imagen en tamaño completo"><img src="assets/img/{p["img"]}" alt="{e(p["img_alt"])}" loading="lazy"></a></figure>'
+           if p["img"] else '<figure class="out eval"><figcaption><span>Out</span> evaluacion.csv</figcaption><table><caption>Recuperación, 45 preguntas</caption>'
                             '<thead><tr><th>Método</th><th>Hit@1</th><th>MRR</th></tr></thead><tbody>'
                             '<tr><td>BM25</td><td>0,844</td><td>0,875</td></tr><tr><td>TF-IDF</td><td>0,889</td><td>0,904</td></tr>'
                             '<tr><td>Híbrido</td><td>0,911</td><td>0,922</td></tr>'
@@ -239,7 +263,7 @@ def role_page(key):
     skills = "".join(f"<li>{e(s)}</li>" for s in r["skills"])
     body = f"""{head(f'{r["name"]} · {NAME}', r['pitch'])}{nav(key)}
 <main id="contenido" style="--role:{r['color']}">
-<section class="role-hero"><h1>{r['name']}</h1><p class="pitch">{e(r['pitch'])}</p><p>{e(r['intro'])}</p></section>
+<section class="role-hero">{BACKDROP_ROLE}<p class="tabname">{r['tab']}</p><h1>{r['name']}</h1><p class="pitch">{e(r['pitch'])}</p><p>{e(r['intro'])}</p></section>
 {''.join(entry(k, r['color']) for k in r['main'])}
 <section class="aside-grid">
 <div><h2>Habilidades que demuestran estos proyectos</h2><ul class="skills">{skills}</ul></div>
@@ -260,14 +284,22 @@ def index():
     cols = ""
     for k, r in ROLES.items():
         items = "".join(f'<li><a href="{r["file"]}#{PROJECTS[pk]["repo"]}">{e(PROJECTS[pk]["title"])}</a>'
-                        f'<span>{e(PROJECTS[pk]["number"])} {e(PROJECTS[pk]["number_label"])}</span></li>' for pk in r["main"])
-        cols += f"""<section class="role-col" style="--role:{r['color']}"><h2><a href="{r['file']}">{r['name']}</a></h2>
+                        f'<span><b>{e(PROJECTS[pk]["number"])}</b> {e(PROJECTS[pk]["number_label"])}</span></li>' for pk in r["main"])
+        cols += f"""<section class="role-col" style="--role:{r['color']}"><p class="tabname">{r['tab']}</p><h2><a href="{r['file']}">{r['name']}</a></h2>
 <p>{e(r['pitch'])}</p><ul>{items}</ul><p class="go"><a href="{r['file']}">Ver los proyectos de {r['short']}</a></p></section>"""
     body = f"""{head(f'{NAME} · Datos e IA', 'Portafolio de análisis de datos, ciencia de datos e ingeniería de IA.')}{nav()}
 <main id="contenido">
-<section class="hero">
+<section class="hero">{BACKDROP}
+<div class="hero-grid">
+<div class="hero-text">
 <h1>Durante 90 días seguí un canal sobre IA y anoté cada publicación. De esas notas salieron seis proyectos.</h1>
-<p class="lede">Soy Juan Manuel, estudiante de la Universidad de Antioquia en Medellín. Trabajo con datos e IA. Este portafolio está organizado por rol: elige el que te interesa, o recorre la línea de tiempo.</p>
+<p class="lede">Soy Juan Manuel, estudiante de Estadística en la Universidad de Antioquia, en Medellín. Trabajo con datos e IA. Este portafolio está organizado por rol: elige el que te interesa, o recorre la línea de tiempo.</p>
+</div>
+<div class="term" role="img" aria-label="Terminal con el resumen del portafolio: 38 % del ingreso perdido en 13 % de los clientes, más 19 % de beneficio con umbral de negocio, 0,933 de acierto en RAG, seis proyectos y 52 tests.">
+<div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>juan@medellin: ~/portafolio</span></div>
+<pre aria-hidden="true"><span class="ln"><span class="prompt">$</span> python portafolio.py</span><span class="ln"><span class="lab" style="color:var(--analista)">✓ analista</span>38 % de la pérdida está en 13 % de clientes</span><span class="ln"><span class="lab" style="color:var(--cientifico)">✓ científico</span>+19 % de beneficio con umbral de negocio</span><span class="ln"><span class="lab" style="color:var(--ia)">✓ ingeniero IA</span>0,933 de acierto en el sistema RAG</span><span class="ln dim">6 proyectos, 52 tests en verde</span><span class="ln"><span class="prompt">$</span> <span class="cursor"></span></span></pre>
+</div>
+</div>
 <figure class="ribbon" aria-labelledby="ribbon-cap">
 <div id="ribbon" role="img" aria-label="Línea de tiempo de 82 publicaciones entre agosto y octubre de 2026, con las publicaciones que inspiraron proyectos marcadas."></div>
 <figcaption id="ribbon-cap">Cada barra es un día, del 2 de agosto al 30 de octubre de 2026; la altura es el número de publicaciones.
@@ -283,6 +315,7 @@ const SEEDS = {json.dumps(seeds, ensure_ascii=False)};
 const PAGES = {json.dumps({k: r["file"] for k, r in ROLES.items()})};
 </script>
 <script src="ribbon.js"></script>
+<script src="term.js"></script>
 {FOOT}"""
     (ROOT / "index.html").write_text(body, encoding="utf-8")
 

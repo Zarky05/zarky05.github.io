@@ -13,14 +13,20 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&family=STIX+Two+Text:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="skip" href="#contenido">Saltar al contenido</a>
 <header class="top"><a class="me" href="index.html">Juan Manuel Herrera Mejia</a><nav aria-label="Portafolios"><a href="analista.html" style="--role:var(--analista)">Analista de datos</a><a href="cientifico.html" style="--role:var(--cientifico)" aria-current=page>Científico de datos</a><a href="ingeniero-ia.html" style="--role:var(--ia)">Ingeniero de IA</a></nav></header>
 <main id="contenido" style="--role:var(--cientifico)">
-<section class="role-hero"><h1>Científico de datos</h1><p class="pitch">Construyo modelos que se evalúan en dinero, no solo en accuracy, y los vigilo cuando están en producción.</p><p>Dos proyectos conectados: un modelo de churn con umbral elegido por beneficio de negocio, y el sistema que detecta cuándo ese modelo deja de funcionar.</p></section>
+<section class="role-hero"><div class="backdrop" aria-hidden="true">
+<span class="c db" style="left:66%;top:8%">SELECT * FROM clientes</span>
+<span class="m" style="left:84%;top:22%">β = (XᵀX)⁻¹ Xᵀy</span>
+<span class="c py" style="left:70%;top:62%">&gt;&gt;&gt; import pandas as pd</span>
+<span class="m" style="left:88%;top:76%">σ²</span>
+<svg class="bell" viewBox="0 0 200 80" style="left:68%;top:28%"><path d="M0 78 C60 78 70 4 100 4 S140 78 200 78"/></svg>
+</div><p class="tabname">cientifico.py</p><h1>Científico de datos</h1><p class="pitch">Construyo modelos que se evalúan en dinero, no solo en accuracy, y los vigilo cuando están en producción.</p><p>Dos proyectos conectados: un modelo de churn con umbral elegido por beneficio de negocio, y el sistema que detecta cuándo ese modelo deja de funcionar.</p></section>
 <article class="entry" id="churn-prediction-pipeline" style="--role:var(--cientifico)">
 <div class="entry-text">
 <h2>Churn Prediction Pipeline</h2>
@@ -32,7 +38,7 @@
 <p class="stack"><span>Herramientas:</span> Python, scikit-learn, DuckDB, SQL, joblib, matplotlib, pytest</p>
 <p class="links"><a href="https://github.com/jmanuelhe/churn-prediction-pipeline">Ver código en GitHub</a></p>
 </div>
-<figure><a href="assets/img/curva_beneficio.png" title="Ver imagen en tamaño completo"><img src="assets/img/curva_beneficio.png" alt="Curva de beneficio según el umbral: el máximo está cerca de 0,25." loading="lazy"></a></figure>
+<figure class="out"><figcaption><span>Out</span> curva_beneficio.png</figcaption><a href="assets/img/curva_beneficio.png" title="Ver imagen en tamaño completo"><img src="assets/img/curva_beneficio.png" alt="Curva de beneficio según el umbral: el máximo está cerca de 0,25." loading="lazy"></a></figure>
 </article><article class="entry" id="model-drift-monitoring" style="--role:var(--cientifico)">
 <div class="entry-text">
 <h2>Model Drift Monitoring</h2>
@@ -44,14 +50,14 @@
 <p class="stack"><span>Herramientas:</span> Python, scikit-learn, SciPy, pandas, Plotly, matplotlib, pytest</p>
 <p class="links"><a href="https://github.com/jmanuelhe/model-drift-monitoring">Ver código en GitHub</a><a href="dashboards/drift-monitoring.html">Abrir dashboard</a></p>
 </div>
-<figure><a href="assets/img/psi_heatmap.png" title="Ver imagen en tamaño completo"><img src="assets/img/psi_heatmap.png" alt="Mapa de calor del PSI por variable y semana: MonthlyCharges y Contract se vuelven críticos desde la semana 7." loading="lazy"></a></figure>
+<figure class="out"><figcaption><span>Out</span> psi_heatmap.png</figcaption><a href="assets/img/psi_heatmap.png" title="Ver imagen en tamaño completo"><img src="assets/img/psi_heatmap.png" alt="Mapa de calor del PSI por variable y semana: MonthlyCharges y Contract se vuelven críticos desde la semana 7." loading="lazy"></a></figure>
 </article>
 <section class="aside-grid">
 <div><h2>Habilidades que demuestran estos proyectos</h2><ul class="skills"><li>scikit-learn (Pipelines, validación cruzada)</li><li>Métricas para clases desbalanceadas</li><li>Calibración de probabilidades</li><li>Estadística (PSI, KS, chi-cuadrado)</li><li>Variables de confusión</li><li>Monitoreo de modelos</li></ul></div>
 <div><h2>También relevante</h2><ul class="also"><li><a href="https://github.com/jmanuelhe/telco-churn-sql-analysis">Telco Churn · Análisis SQL</a> · ¿Quién se va, cuánto ingreso se pierde y dónde conviene actuar primero?</li><li><a href="https://github.com/jmanuelhe/rag-document-qa">RAG Document Q&amp;A</a> · ¿Puedo preguntarle a mis propios informes y recibir respuestas con fuente?</li></ul></div>
 </section>
 </main>
-<footer class="foot"><p>Juan Manuel Herrera Mejia · Medellín, Colombia</p>
+<footer class="foot"><p class="who">Juan Manuel Herrera Mejia, Medellín (Colombia)</p>
 <p class="contact"><a href="mailto:jherreramej@gmail.com">jherreramej@gmail.com</a> <a href="https://www.linkedin.com/in/juanmhmejia">LinkedIn</a> <a href="https://github.com/jmanuelhe">GitHub</a></p>
 <p class="small">Todos los proyectos tienen código, datos y tests en sus repositorios.</p></footer>
 </body></html>
