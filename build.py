@@ -11,6 +11,7 @@ GH = "https://github.com/jmanuelhe"
 NAME = "Juan Manuel Herrera Mejia"
 EMAIL = "jherreramej@gmail.com"
 LINKEDIN = "https://www.linkedin.com/in/juanmhmejia"
+CV = "assets/CV_Juan_Manuel_Herrera_Mejia.pdf"
 
 PROJECTS = {
     "mdd": {
@@ -218,11 +219,14 @@ def nav(active=None):
     links = "".join(
         f'<a href="{r["file"]}" style="--role:{r["color"]}"{" aria-current=page" if k == active else ""}>{r["name"]}</a>'
         for k, r in ROLES.items())
-    return f"""<header class="top"><a class="me" href="index.html">{NAME}</a><nav aria-label="Portafolios">{links}</nav></header>"""
+    links += '<span class="sep" aria-hidden="true"></span>' + "".join(
+        f'<a href="{f}" style="--role:var(--amber)"{" aria-current=page" if k == active else ""}>{n}</a>'
+        for k, f, n in [("sobre", "sobre-mi.html", "Sobre mí"), ("notas", "notas.html", "Notas")])
+    return f"""<header class="top"><a class="me" href="index.html">{NAME}</a><nav aria-label="Secciones">{links}</nav></header>"""
 
 
 FOOT = f"""<footer class="foot"><p class="who">{NAME}, Medellín (Colombia)</p>
-<p class="contact"><a href="mailto:{EMAIL}">{EMAIL}</a> <a href="{LINKEDIN}">LinkedIn</a> <a href="{GH}">GitHub</a></p>
+<p class="contact"><a href="mailto:{EMAIL}">{EMAIL}</a> <a href="{LINKEDIN}">LinkedIn</a> <a href="{GH}">GitHub</a> <a href="{CV}" download>Hoja de vida (PDF)</a></p>
 <p class="small">Todos los proyectos tienen código, datos y tests en sus repositorios.</p></footer>
 </body></html>"""
 
@@ -321,6 +325,8 @@ const PAGES = {json.dumps({k: r["file"] for k, r in ROLES.items()})};
 
 
 if __name__ == "__main__":
+    import extra
+    extra.build(globals())
     index()
     for k in ROLES:
         role_page(k)

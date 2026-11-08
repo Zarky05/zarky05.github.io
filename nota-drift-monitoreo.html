@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitorear los datos no basta: lo que aprendí simulando drift · Juan Manuel Herrera Mejia</title>
+<meta name="description" content="Simulé 16 semanas de producción. El cambio que más daño hizo no se veía en los datos, solo en el rendimiento.">
+<meta property="og:title" content="Monitorear los datos no basta: lo que aprendí simulando drift · Juan Manuel Herrera Mejia">
+<meta property="og:description" content="Simulé 16 semanas de producción. El cambio que más daño hizo no se veía en los datos, solo en el rendimiento.">
+<meta property="og:image" content="https://jmanuelhe.github.io/assets/og.png">
+<meta property="og:url" content="https://jmanuelhe.github.io/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&family=STIX+Two+Text:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top"><a class="me" href="index.html">Juan Manuel Herrera Mejia</a><nav aria-label="Secciones"><a href="analista.html" style="--role:var(--analista)">Analista de datos</a><a href="cientifico.html" style="--role:var(--cientifico)">Científico de datos</a><a href="ingeniero-ia.html" style="--role:var(--ia)">Ingeniero de IA</a><span class="sep" aria-hidden="true"></span><a href="sobre-mi.html" style="--role:var(--amber)">Sobre mí</a><a href="notas.html" style="--role:var(--amber)" aria-current=page>Notas</a></nav></header>
+<main id="contenido" style="--role:var(--cientifico)">
+<article class="note">
+<p class="crumbs"><a href="notas.html">Notas</a></p>
+<h1>Monitorear los datos no basta: lo que aprendí simulando drift</h1>
+<p class="note-meta">Noviembre de 2026. Juan Manuel Herrera Mejia</p>
+<p class="note-lede">Simulé 16 semanas de producción. El cambio que más daño hizo no se veía en los datos, solo en el rendimiento.</p>
+<p>Un modelo entrenado hoy empieza a envejecer mañana. Los clientes cambian, los precios cambian y la relación entre las variables y el resultado también. Quería ver ese envejecimiento de cerca, así que lo simulé.</p><h2>El montaje</h2><p>Tomé el modelo de churn y simulé 16 semanas de producción con dos tipos de cambio controlados: data drift, cuando cambia la distribución de las variables, y concept drift, cuando cambia la relación entre las variables y el churn. Para vigilarlo implementé PSI por variable, pruebas KS y chi-cuadrado, y monitoreo de calibración.</p><h2>Lo que pasó</h2><p>La primera alerta de drift llegó en la semana 6. Desde la semana 7, el PSI de MonthlyCharges y Contract entró en zona crítica. La caída fuerte del rendimiento llegó en la semana 8.</p><p>El hallazgo más importante fue incómodo: el concept drift no aparece en el PSI. Las variables pueden verse estables mientras el modelo se equivoca cada vez más. Solo se detecta mirando el rendimiento, y para eso hacen falta etiquetas reales.</p><h2>Reentrenar también puede salir mal</h2><p>Diseñé una política de reentrenamiento con disparadores por datos y por rendimiento, y un periodo de enfriamiento. Documenté un error propio: un reentrenamiento temprano, con pocos datos nuevos, empeoró el modelo. Con la política final, el modelo vivo llegó a un AUC de 0,789 en las semanas 13 a 16, frente a 0,763 del modelo que nunca se actualizó.</p><h2>Qué me llevo</h2><p>Vigilar solo los datos da una falsa tranquilidad. Un monitoreo útil combina las dos miradas, datos y rendimiento, y una regla clara de cuándo actuar y cuándo esperar.</p>
+<aside class="note-proj"><p>Proyecto relacionado</p><h3>Model Drift Monitoring</h3>
+<p class="links"><a href="https://github.com/jmanuelhe/model-drift-monitoring">Ver código en GitHub</a></p></aside>
+<nav class="more" aria-label="Otras notas"><h2>Otras notas</h2><ul><li><a href="nota-90-dias-canal-ia.html">Seguí un canal de IA durante 90 días y medí qué me estaba enseñando</a></li><li><a href="nota-umbral-churn.html">Por qué mi modelo de churn decide con 0,25 y no con 0,5</a></li></ul></nav>
+</article>
+</main>
+<footer class="foot"><p class="who">Juan Manuel Herrera Mejia, Medellín (Colombia)</p>
+<p class="contact"><a href="mailto:jherreramej@gmail.com">jherreramej@gmail.com</a> <a href="https://www.linkedin.com/in/juanmhmejia">LinkedIn</a> <a href="https://github.com/jmanuelhe">GitHub</a> <a href="assets/CV_Juan_Manuel_Herrera_Mejia.pdf" download>Hoja de vida (PDF)</a></p>
+<p class="small">Todos los proyectos tienen código, datos y tests en sus repositorios.</p></footer>
+</body></html>
